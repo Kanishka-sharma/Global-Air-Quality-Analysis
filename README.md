@@ -44,14 +44,14 @@ Missing data ranged between **5%–20% per variable**.
 
 ### Methodology Overview
 
-#### 1️ Exploratory Data Analysis
+#### 1️. Exploratory Data Analysis
 - Checked missing values, outliers, and correlations  
 - Visualized variable distributions and missingness patterns using:
   - `corrplot`
   - `VIM::aggr()`
   - `ggplot2` boxplots  
 
-#### 2️ Missing Data Mechanism Analysis
+#### 2️. Missing Data Mechanism Analysis
 - Applied **Little’s MCAR test**  
 - Used **logistic regression** to test for MAR dependency  
 - Performed **Wilcoxon tests** for potential MNAR behavior  
@@ -60,17 +60,17 @@ Findings:
 - `CO2` missingness ≈ MCAR  
 - `CO` missingness ≈ MAR (dependent on `CFC11`)
 
-#### 3️ Imputation
+#### 3️. Imputation
 - `CO2` → Imputed via **MICE (PMM)**  
 - `CO` → Imputed using **CFC11** as predictor under MAR assumption  
 
-#### 4️ Dimensionality Reduction (PCA)
+#### 4️. Dimensionality Reduction (PCA)
 - Standardized data before PCA  
 - Extracted eigenvalues, scree plot, and variable contributions  
 - First two PCs explained **~80% of total variance**  
 - Stability checked using **bootstrap-based eigenvalue distribution**
 
-#### 5️ Clustering
+#### 5️. Clustering
 | Method | Optimal K | Evaluation Metric | Avg. Silhouette |
 |--------|-------------|------------------|-----------------|
 | K-Means | 2 | Silhouette | 0.57 |
@@ -80,7 +80,7 @@ Findings:
 
 The **K-Medoids** approach provided the most stable clustering.
 
-#### 6️ Visualization
+#### 6️. Visualization
 - **Scree Plot:** Explained variance by PCs  
 - **PCA Biplot:** Variable correlations  
 - **Cluster plots:** Samples grouped in PCA space  
