@@ -1,8 +1,8 @@
 # Global Air Quality Analysis — Unsupervised Learning on Atmospheric Data
 
 ### Project Overview
-This project explores atmospheric gas concentration data collected from the **Mauna Loa Observatory**.  
-The dataset contains multiple greenhouse gases (CO₂, CO, Methane, Nitrous Oxide, and CFC-11) recorded over time.  
+This project explores atmospheric gas concentration data collected from the **Mauna Loa Observatory**.
+The dataset contains multiple greenhouse gases (CO₂, CO, Methane, Nitrous Oxide, and CFC-11) recorded over time.
 
 Our goal is to:
 - Handle **missing data** using statistical imputation,
@@ -15,83 +15,83 @@ This analysis demonstrates a complete **end-to-end data science workflow** — f
 ---
 
 ### Key Objectives
-1. **Explore** data characteristics and detect missingness/outliers.  
-2. **Identify** the missing data mechanism (MCAR/MAR/MNAR).  
-3. **Impute** missing values using **MICE (Predictive Mean Matching)**.  
-4. **Reduce** dimensionality with **Principal Component Analysis (PCA)**.  
+1. **Explore** data characteristics and detect missingness/outliers.
+2. **Identify** the missing data mechanism (MCAR/MAR/MNAR).
+3. **Impute** missing values using **MICE (Predictive Mean Matching)**.
+4. **Reduce** dimensionality with **Principal Component Analysis (PCA)**.
 5. **Cluster** observations using:
-   - K-Means  
-   - K-Medoids (PAM)  
-   - Hierarchical (Ward’s method)  
-   - Model-Based Clustering (via BIC)  
+   - K-Means
+   - K-Medoids (PAM)
+   - Hierarchical (Ward’s method)
+   - Model-Based Clustering (via BIC)
 6. **Interpret** environmental emission patterns revealed by clusters.
 
 ---
 
 ### Dataset
-- **Source**: Simulated/derived Mauna Loa Observatory dataset  
-- **Shape**: 183 observations × 5 continuous variables  
+- **Source**: Simulated/derived Mauna Loa Observatory dataset
+- **Shape**: 183 observations × 5 continuous variables
 - **Variables**:
-  - `CO` — Carbon Monoxide  
-  - `CO2` — Carbon Dioxide  
-  - `Methane`  
-  - `NitrousOx` — Nitrous Oxide  
-  - `CFC11` — Chlorofluorocarbon-11  
+  - `CO` - Carbon Monoxide
+  - `CO2` - Carbon Dioxide
+  - `Methane`
+  - `NitrousOx` - Nitrous Oxide
+  - `CFC11` - Chlorofluorocarbon-11
 
-Missing data ranged between **5%–20% per variable**.
+Missing data ranged between **5%-20% per variable**.
 
 ---
 
 ### Methodology Overview
 
 #### 1️. Exploratory Data Analysis
-- Checked missing values, outliers, and correlations  
+- Checked missing values, outliers, and correlations
 - Visualized variable distributions and missingness patterns using:
   - `corrplot`
   - `VIM::aggr()`
-  - `ggplot2` boxplots  
+  - `ggplot2` boxplots
 
 #### 2️. Missing Data Mechanism Analysis
-- Applied **Little’s MCAR test**  
-- Used **logistic regression** to test for MAR dependency  
-- Performed **Wilcoxon tests** for potential MNAR behavior  
+- Applied **Little’s MCAR test**
+- Used **logistic regression** to test for MAR dependency
+- Performed **Wilcoxon tests** for potential MNAR behavior
 
 Findings:
-- `CO2` missingness ≈ MCAR  
+- `CO2` missingness ≈ MCAR
 - `CO` missingness ≈ MAR (dependent on `CFC11`)
 
 #### 3️. Imputation
-- `CO2` → Imputed via **MICE (PMM)**  
-- `CO` → Imputed using **CFC11** as predictor under MAR assumption  
+- `CO2` → Imputed via **MICE (PMM)**
+- `CO` → Imputed using **CFC11** as predictor under MAR assumption
 
 #### 4️. Dimensionality Reduction (PCA)
-- Standardized data before PCA  
-- Extracted eigenvalues, scree plot, and variable contributions  
-- First two PCs explained **~80% of total variance**  
+- Standardized data before PCA
+- Extracted eigenvalues, scree plot, and variable contributions
+- First two PCs explained **~97.6% of total variance**
 - Stability checked using **bootstrap-based eigenvalue distribution**
 
 #### 5️. Clustering
 | Method | Optimal K | Evaluation Metric | Avg. Silhouette |
 |--------|-------------|------------------|-----------------|
-| K-Means | 2 | Silhouette | 0.57 |
-| K-Medoids (PAM) | 2 | Silhouette | 0.59 |
-| Hierarchical (Ward.D2) | 2 | Silhouette | 0.55 |
-| Model-Based (BIC) | 2 | Highest BIC | 0.58 |
+| K-Means | 2 | Silhouette | 0.472 |
+| K-Medoids (PAM) | 2 | Silhouette | 0.472 |
+| Hierarchical (Ward.D2) | 2 | Silhouette | 0.509 |
+| Model-Based (BIC) | 3 | Highest BIC | 0.468 |
 
-The **K-Medoids** approach provided the most stable clustering.
+The **Hierarchical** approach provided the most stable clustering.
 
 #### 6️. Visualization
-- **Scree Plot:** Explained variance by PCs  
-- **PCA Biplot:** Variable correlations  
-- **Cluster plots:** Samples grouped in PCA space  
-- **Silhouette plots:** Cluster quality comparison  
+- **Scree Plot:** Explained variance by PCs
+- **PCA Biplot:** Variable correlations
+- **Cluster plots:** Samples grouped in PCA space
+- **Silhouette plots:** Cluster quality comparison
 
 ---
 
 ### Key Insights
 - Two main **emission regimes** were identified:
-  - **Cluster 1:** Higher CO₂, Methane, and N₂O → likely industrial/urban influence  
-  - **Cluster 2:** Lower overall emissions → background or natural variability  
+  - **Cluster 1:** Higher CO₂, Methane, and N₂O → likely industrial/urban influence
+  - **Cluster 2:** Lower overall emissions → background or natural variability
 - PCA revealed **CO₂ and Methane** as dominant contributors to total variance.
 - Imputation and PCA confirmed strong inter-variable correlation, validating environmental dependence among gases.
 
@@ -110,7 +110,7 @@ The **K-Medoids** approach provided the most stable clustering.
 ---
 
 ### Project Learnings
-- Handling **non-random missingness** through diagnostics and custom imputation  
-- Applying **unsupervised learning** to discover latent structure in real-world environmental data  
-- Evaluating clustering stability and **model interpretability** in PCA-reduced space  
+- Handling **non-random missingness** through diagnostics and custom imputation
+- Applying **unsupervised learning** to discover latent structure in real-world environmental data
+- Evaluating clustering stability and **model interpretability** in PCA-reduced space
 - Building reproducible and visual **data science pipelines in R**
