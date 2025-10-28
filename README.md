@@ -1,4 +1,4 @@
-# Global Air Quality Analysis — Unsupervised Learning on Atmospheric Data
+# Global Air Quality Analysis - Unsupervised Learning on Atmospheric Data
 
 ### Project Overview
 This project explores atmospheric gas concentration data collected from the **Mauna Loa Observatory**.
@@ -10,7 +10,7 @@ Our goal is to:
 - Perform **unsupervised clustering** (K-Means, K-Medoids, Hierarchical, and Model-Based),
 - Evaluate and visualize the resulting **air quality groupings**.
 
-This analysis demonstrates a complete **end-to-end data science workflow** — from raw data to meaningful environmental insights.
+This analysis demonstrates a complete **end-to-end data science workflow** - from raw data to meaningful environmental insights.
 
 ---
 
